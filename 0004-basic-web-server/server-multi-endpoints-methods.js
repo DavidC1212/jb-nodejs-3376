@@ -1,17 +1,22 @@
 const { createServer } = require('http');
 
 const PORT = '8080';
+const HOST = 'localhost'
 
 const requestListener = function (req, res) {
     console.log(req);
-    if (req.url === '/name' && req.method === 'POST') {
+    if (req.url === '/csv' && req.method === 'POST') {
+        res.setHeader('Content-Type', 'text/csv');
+        res.setHeader("Content-Disposition", "attachment;filename=johnbryce.csv");
         res.writeHead(200);
-        return res.end("name endpoint");
+        return res.end('id,name,age\n12345678,shahar,47');
     }
 
-    if (req.url === '/age' && req.method === 'GET') {
+    if (req.url === '/json' && req.method === 'GET') {
+        res.setHeader('Content-Type', 'application/json');
+        const data = { schoolName: 'John Bryce' };
         res.writeHead(200);
-        return res.end("age endpoint");
+        return res.end(JSON.stringify(data));
     }
 
     res.writeHead(404);

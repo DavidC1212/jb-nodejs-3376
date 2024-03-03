@@ -1,6 +1,7 @@
 const { createServer } = require('http');
 
 const PORT = '8080';
+const HOST = 'localhost'
 
 const requestListener = function (req, res) {
     res.setHeader('Content-Type', 'application/json');
